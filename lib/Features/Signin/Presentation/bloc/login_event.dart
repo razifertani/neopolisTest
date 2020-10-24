@@ -27,19 +27,13 @@ class ProfileShow extends LoginEvent {
 }
 
 class LogoutEvent extends LoginEvent {
+  final String type;
   final String idUser;
   final String idSession;
 
   LogoutEvent({
-    @required this.idUser,
-    @required this.idSession,
-  }) : super([idUser, idSession]);
-}
-
-class LogoutGoogleEvent extends LoginEvent {
-  final String test;
-
-  LogoutGoogleEvent({
-    @required this.test,
-  }) : super([test]);
+    @required this.type,
+    this.idUser,
+    this.idSession,
+  }) : super([type, idUser, idSession]);
 }

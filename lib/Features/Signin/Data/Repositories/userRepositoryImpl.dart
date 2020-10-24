@@ -54,29 +54,12 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, String>> logout(
-      String idUser, String idSession) async {
+      String type, String idUser, String idSession) async {
     try {
       if (await networkInfo.isConnected == false) {
         throw ServerExeption();
       }
-      response = await remoteDataSource.logout(idUser, idSession);
-      if (response is String) {
-        return Right(response);
-      } else {
-        return Left(response);
-      }
-    } on ServerExeption {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, String>> logoutGoogle(String test) async {
-    try {
-      if (await networkInfo.isConnected == false) {
-        throw ServerExeption();
-      }
-      response = await remoteDataSource.logoutGoogle(test);
+      response = await remoteDataSource.logout(type, idUser, idSession);
       if (response is String) {
         return Right(response);
       } else {

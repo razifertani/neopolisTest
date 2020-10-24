@@ -41,6 +41,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         final profile = Profile.fromJson(json.decode(responsee.body));
         profile.idUser = idUser;
         profile.idSession = idSession;
+        profile.type = 'Email';
         return profile;
       } else if (responsee.statusCode == 401) {
         final profile = Profile(
@@ -79,29 +80,29 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<String> logout(String idUser, String idSession) async {
-    final response = await http.get(
-      "https://ws.interface-crm.com:444/view_user?id_user=$idUser",
-      headers: {
-        'Content-Type': 'application/json',
-        'idSession': idSession,
-      },
-    );
+  Future<String> logout(String type, String idUser, String idSession) async {
+    if (type == 'Email') {
+      final response = await http.get(
+        "https://ws.interface-crm.com:444/view_user?id_user=$idUser",
+        headers: {
+          'Content-Type': 'application/json',
+          'idSession': idSession,
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final message = json.decode(response.body)['message'];
-      return message;
-    } else if (response.statusCode == 304) {
-      final message = json.decode(response.body)['message'];
-      return message;
-    } else {
-      throw ServerExeption();
+      if (response.statusCode == 200) {
+        final message = json.decode(response.body)['message'];
+        return message;
+      } else if (response.statusCode == 304) {
+        final message = json.decode(response.body)['message'];
+        return message;
+      } else {
+        throw ServerExeption();
+      }
     }
-  }
-
-  @override
-  Future<String> logoutGoogle(String test) async {
-    await SocialMediaService().signOutGoogle();
-    return 'Success';
+    if (type == 'Google') {
+      await SocialMediaService().signOutGoogle();
+      return 'Success';
+    }
   }
 }

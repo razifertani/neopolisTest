@@ -1,5 +1,6 @@
 class Profile {
   String idUser;
+  String type;
   String idSession;
   int active;
   Address address;
@@ -26,6 +27,7 @@ class Profile {
 
   Profile(
       {this.idUser,
+      this.type,
       this.idSession,
       this.active,
       this.address,
@@ -379,6 +381,7 @@ class UserRelation {
   int idLanguage;
   int idRole;
   int idUser;
+  String type;
   String idSession;
   String lastName;
   String lastUpdate;
@@ -402,6 +405,7 @@ class UserRelation {
       this.idLanguage,
       this.idRole,
       this.idUser,
+      this.type,
       this.idSession,
       this.lastName,
       this.lastUpdate,

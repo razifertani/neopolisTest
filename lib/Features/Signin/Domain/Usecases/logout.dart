@@ -12,14 +12,16 @@ class Logout implements Usescases<String, Paramss> {
 
   @override
   Future<Either<Failure, String>> call(Paramss paramss) async {
-    return await userRepository.logout(paramss.idUser, paramss.idSession);
+    return await userRepository.logout(
+        paramss.type, paramss.idUser, paramss.idSession);
   }
 }
 
 class Paramss extends Equatable {
+  final String type;
   final String idUser;
   final String idSession;
 
-  Paramss({@required this.idUser, @required this.idSession})
-      : super([idUser, idSession]);
+  Paramss({this.type, @required this.idUser, @required this.idSession})
+      : super([type, idUser, idSession]);
 }

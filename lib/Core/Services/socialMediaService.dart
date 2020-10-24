@@ -31,8 +31,8 @@ class SocialMediaService {
     user.phoneNumber != null
         ? profile.tel = user.phoneNumber
         : profile.tel = '1234';
-    // profile.photoUrl = user.photoUrl;
     profile.userEmergencyContact = [];
+    profile.type = 'Google';
 
     return profile;
   }

@@ -22,7 +22,6 @@ void init() {
         login: sl(),
         loginGoogle: sl(),
         logout: sl(),
-        logoutGoogle: sl(),
       ));
 
   // ? Use cases

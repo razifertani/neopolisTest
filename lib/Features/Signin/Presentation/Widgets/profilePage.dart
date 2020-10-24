@@ -414,7 +414,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       onPressed: () {
-                        dispatchLogout();
+                        dispatchLogout(widget.profile.type);
                       },
                       child: Text(
                         'Log out',
@@ -435,9 +435,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     );
   }
 
-  void dispatchLogout() {
+  void dispatchLogout(String type) {
     BlocProvider.of<LoginBloc>(context).dispatch(
       LogoutEvent(
+        type: widget.profile.type,
         idUser: widget.profile.idUser,
         idSession: widget.profile.idSession,
       ),
