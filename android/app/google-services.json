@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "755424738768",
+    "firebase_url": "https://neopolis-76d0b.firebaseio.com",
+    "project_id": "neopolis-76d0b",
+    "storage_bucket": "neopolis-76d0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755424738768:android:4df19ef7db1c6430f00dd5",
+        "android_client_info": {
+          "package_name": "com.app.neopolis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755424738768-v5itebcp6rc3cb0dns8g34cq1sol9bei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.neopolis",
+            "certificate_hash": "34aec144d2aae23594d9a7baa77d9c1726c07cc4"
+          }
+        },
+        {
+          "client_id": "755424738768-nam64h4r6pa794vm0n90jej99h3k5ttf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7hOsNV_BtUkOw5WJHdcKjZwd4ZTdoCaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755424738768-nam64h4r6pa794vm0n90jej99h3k5ttf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

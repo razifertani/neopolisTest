@@ -21,6 +21,8 @@ dependencies:
   auto_size_text: ^2.1.0
   mercury_client: ^1.1.12
   rflutter_alert: ^1.1.0
+  firebase_auth: ^0.16.0
+  google_sign_in: ^4.4.4
 
   cupertino_icons: ^1.0.0
 
