@@ -80,6 +80,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
+  Future<Profile> loginFacebook(String test) async {
+    Profile profile = await SocialMediaService().loginWithFB();
+    return profile;
+  }
+
+  @override
   Future<String> logout(String type, String idUser, String idSession) async {
     if (type == 'Email') {
       final response = await http.get(
@@ -104,6 +110,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       await SocialMediaService().signOutGoogle();
       return 'Success';
     }
-    return 'Error';
+    if (type == 'Facebook') {
+      await SocialMediaService().facebookSignIn.logOut();
+    }
+    return 'Logout Error';
   }
 }

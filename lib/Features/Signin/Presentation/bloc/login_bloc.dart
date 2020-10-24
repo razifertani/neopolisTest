@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:neopolis/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/login.dart';
+import 'package:neopolis/Features/Signin/Domain/Usecases/loginFacebook.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/loginGoogle.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/logout.dart';
 
@@ -13,11 +14,13 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Login login;
   final LoginGoogle loginGoogle;
+  final LoginFacebook loginFacebook;
   final Logout logout;
 
   LoginBloc({
     @required this.login,
     @required this.loginGoogle,
+    @required this.loginFacebook,
     @required this.logout,
   }) : assert(login != null, logout != null);
 
@@ -68,6 +71,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is SigningGoogle) {
       yield Loading();
       final failureOrToken = await loginGoogle('Test');
+      yield* failureOrToken.fold((failure) async* {
+        yield Error(
+          message: 'Server failure it will be up in a minute',
+        );
+      }, (profile) async* {
+        yield Loaded(profile: profile);
+      });
+    }
+    if (event is SigningFacebook) {
+      yield Loading();
+      final failureOrToken = await loginFacebook('Test');
       yield* failureOrToken.fold((failure) async* {
         yield Error(
           message: 'Server failure it will be up in a minute',

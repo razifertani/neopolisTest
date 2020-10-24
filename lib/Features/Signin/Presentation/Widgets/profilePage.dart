@@ -153,32 +153,35 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Image.asset(
-                              'Assets/photo.png',
-                              fit: BoxFit.fitHeight,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: height * 0.008),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Image.asset(
+                                'Assets/photo.png',
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  widget.profile.firstName,
-                                  style: TextStyle(fontSize: 40),
-                                ),
-                                Text(
-                                  widget.profile.lastName,
-                                  style: TextStyle(fontSize: 40),
-                                ),
-                              ],
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    widget.profile.firstName,
+                                    style: TextStyle(fontSize: 40),
+                                  ),
+                                  Text(
+                                    widget.profile.lastName,
+                                    style: TextStyle(fontSize: 40),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

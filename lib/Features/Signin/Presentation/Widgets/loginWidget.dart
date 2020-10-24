@@ -341,7 +341,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
   }
 
   void dispatchFacebook() {
-    SocialMediaService socialMediaService = SocialMediaService();
-    socialMediaService.loginWithFB();
+    BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebook());
   }
 }

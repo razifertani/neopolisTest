@@ -14,6 +14,8 @@ class Signin extends LoginEvent {
 
 class SigningGoogle extends LoginEvent {}
 
+class SigningFacebook extends LoginEvent {}
+
 class ProfileShow extends LoginEvent {
   final String idUser;
   final String idLanguage;

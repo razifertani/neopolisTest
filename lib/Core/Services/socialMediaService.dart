@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:neopolis/Core/Error/exceptions.dart';
 import 'package:neopolis/Features/Signin/Domain/Entities/profileEntity.dart';
 
 class SocialMediaService {
@@ -45,35 +46,25 @@ class SocialMediaService {
     await googleSignIn.signOut();
   }
 
-  //
-
-  Future<String> loginWithFB() async {
+  Future<Profile> loginWithFB() async {
     final result = await facebookSignIn.logInWithReadPermissions(['email']);
+    Profile profile = Profile();
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      final token = result.accessToken.token;
+      final response = await http.get(
+          'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
 
-    switch (result.status) {
-      case FacebookLoginStatus.loggedIn:
-        final token = result.accessToken.token;
-        final response = await http.get(
-            'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
-        final profile = jsonDecode(response.body);
-        print(profile);
-        print('Connected');
-        return 'Connected';
-        break;
+      profile.firstName = json.decode(response.body)['name'];
+      profile.lastName = '';
+      profile.mail = json.decode(response.body)['email'];
+      profile.tel = '1234';
+      profile.userEmergencyContact = [];
+      profile.type = 'Facebook';
 
-      case FacebookLoginStatus.cancelledByUser:
-        print('Cancelled');
-        return 'Cancelled';
-        break;
-      case FacebookLoginStatus.error:
-        print('Error');
-        return 'Error';
-        break;
+      return profile;
+    } else {
+      throw ServerExeption();
     }
-    return 'Heree';
-  }
-
-  logout() {
-    facebookSignIn.logOut();
+    return profile;
   }
 }

@@ -8,6 +8,7 @@ import 'package:neopolis/Features/Signin/Data/Datasource/userRemoteDatasource.da
 import 'package:neopolis/Features/Signin/Data/Repositories/userRepositoryImpl.dart';
 import 'package:neopolis/Features/Signin/Domain/Repositories/userRepository.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/login.dart';
+import 'package:neopolis/Features/Signin/Domain/Usecases/loginFacebook.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/loginGoogle.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/logout.dart';
 import 'package:neopolis/Features/Signin/Presentation/bloc/login_bloc.dart';
@@ -21,12 +22,14 @@ void init() {
   sl.registerFactory(() => LoginBloc(
         login: sl(),
         loginGoogle: sl(),
+        loginFacebook: sl(),
         logout: sl(),
       ));
 
   // ? Use cases
   sl.registerLazySingleton(() => Login(sl()));
   sl.registerLazySingleton(() => LoginGoogle(sl()));
+  sl.registerLazySingleton(() => LoginFacebook(sl()));
   sl.registerLazySingleton(() => Logout(sl()));
 
   // ? Repository

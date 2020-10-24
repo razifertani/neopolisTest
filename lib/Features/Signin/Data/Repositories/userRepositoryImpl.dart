@@ -53,6 +53,23 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<Either<Failure, Profile>> loginFacebook(String test) async {
+    try {
+      if (await networkInfo.isConnected == false) {
+        throw ServerExeption();
+      }
+      response = await remoteDataSource.loginFacebook(test);
+      if (response is Profile) {
+        return Right(response);
+      } else {
+        return Left(response);
+      }
+    } on ServerExeption {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, String>> logout(
       String type, String idUser, String idSession) async {
     try {
