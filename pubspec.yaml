@@ -23,7 +23,7 @@ dependencies:
   rflutter_alert: ^1.1.0
   firebase_auth: ^0.16.0
   google_sign_in: ^4.4.4
-
+  flutter_facebook_login:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

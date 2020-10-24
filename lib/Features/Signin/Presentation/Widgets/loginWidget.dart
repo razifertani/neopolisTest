@@ -18,10 +18,8 @@ class LoginDisplay extends StatefulWidget {
 }
 
 class _LoginDisplayState extends State<LoginDisplay> {
-  String email = 'foundme.neodev@gmail.com';
-  String password = 'NeoDev12345#';
-  // String email;
-  // String password;
+  String email;
+  String password;
   String message = 'null';
   bool isHidden = true;
   bool checkerEmail = true;
@@ -249,7 +247,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                   children: [
                     InkWell(
                       onTap: () {
-                        print('Here');
+                        dispatchFacebook();
                       },
                       child: Row(
                         children: [
@@ -340,5 +338,10 @@ class _LoginDisplayState extends State<LoginDisplay> {
 
   void dispatchGoogle() {
     BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogle());
+  }
+
+  void dispatchFacebook() {
+    SocialMediaService socialMediaService = SocialMediaService();
+    socialMediaService.loginWithFB();
   }
 }

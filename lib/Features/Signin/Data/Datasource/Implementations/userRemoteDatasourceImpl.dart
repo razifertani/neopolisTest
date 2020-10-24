@@ -104,5 +104,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       await SocialMediaService().signOutGoogle();
       return 'Success';
     }
+    return 'Error';
   }
 }
