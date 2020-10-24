@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neopolis/Core/Services/socialMediaService.dart';
 import 'package:neopolis/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -245,42 +247,52 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      children: [
-                        Image.asset(
-                          'Assets/facebook.png',
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            'USING FACEBOOK',
-                            style: TextStyle(
-                              fontSize: 20,
+                    InkWell(
+                      onTap: () {
+                        print('Here');
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'Assets/facebook.png',
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              'USING FACEBOOK',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Container(
                       width: 1,
                       height: 20,
                       color: Colors.black,
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'Assets/google.png',
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            'USING GOOGLE',
-                            style: TextStyle(
-                              fontSize: 20,
+                    InkWell(
+                      onTap: () {
+                        dispatchGoogle();
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'Assets/google.png',
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              'USING GOOGLE',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -324,5 +336,9 @@ class _LoginDisplayState extends State<LoginDisplay> {
   void dispatchLogin() {
     BlocProvider.of<LoginBloc>(context)
         .dispatch(Signin(email: email, password: password));
+  }
+
+  void dispatchGoogle() {
+    BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogle());
   }
 }

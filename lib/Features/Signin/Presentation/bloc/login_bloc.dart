@@ -4,17 +4,25 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:neopolis/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/login.dart';
+import 'package:neopolis/Features/Signin/Domain/Usecases/loginGoogle.dart';
 import 'package:neopolis/Features/Signin/Domain/Usecases/logout.dart';
+import 'package:neopolis/Features/Signin/Domain/Usecases/logoutGoogle.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Login login;
+  final LoginGoogle loginGoogle;
   final Logout logout;
+  final LogoutGoogle logoutGoogle;
 
-  LoginBloc({@required this.login, @required this.logout})
-      : assert(login != null, logout != null);
+  LoginBloc({
+    @required this.login,
+    @required this.loginGoogle,
+    @required this.logout,
+    @required this.logoutGoogle,
+  }) : assert(login != null, logout != null);
 
   @override
   LoginState get initialState => Empty();
@@ -60,6 +68,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         });
       }
     }
+    if (event is SigningGoogle) {
+      yield Loading();
+      final failureOrToken = await loginGoogle('Test');
+      yield* failureOrToken.fold((failure) async* {
+        yield Error(
+          message: 'Server failure it will be up in a minute',
+        );
+      }, (profile) async* {
+        yield Loaded(profile: profile);
+      });
+    }
     if (event is LogoutEvent) {
       yield Loading();
       final paramss = Paramss(idUser: event.idUser, idSession: event.idSession);
@@ -76,6 +95,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else {
           yield Logouted();
         }
+      });
+    }
+    if (event is LogoutGoogleEvent) {
+      yield Loading();
+      final failureOrToken = await logoutGoogle('Test');
+      yield* failureOrToken.fold((failure) async* {
+        yield Error(
+          message: 'Server failure it will be up in a minute',
+        );
+      }, (message) async* {
+        yield Logouted();
       });
     }
   }

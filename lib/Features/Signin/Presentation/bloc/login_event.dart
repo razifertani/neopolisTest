@@ -12,6 +12,8 @@ class Signin extends LoginEvent {
       : super([email, password]);
 }
 
+class SigningGoogle extends LoginEvent {}
+
 class ProfileShow extends LoginEvent {
   final String idUser;
   final String idLanguage;
@@ -32,4 +34,12 @@ class LogoutEvent extends LoginEvent {
     @required this.idUser,
     @required this.idSession,
   }) : super([idUser, idSession]);
+}
+
+class LogoutGoogleEvent extends LoginEvent {
+  final String test;
+
+  LogoutGoogleEvent({
+    @required this.test,
+  }) : super([test]);
 }

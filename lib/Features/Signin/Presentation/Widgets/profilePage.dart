@@ -22,63 +22,65 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     double height = MediaQuery.of(context).size.height;
     List<Widget> list = [];
 
-    widget.profile.userEmergencyContact.forEach((element) {
-      list.add(
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            element.relation != null
-                ? Text(
-                    element.firstName +
-                        ' ' +
-                        element.lastName +
-                        ' (' +
-                        element.relation +
-                        ') ',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  )
-                : Text(
-                    element.firstName + ' ' + element.lastName,
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
+    widget.profile.userEmergencyContact.isNotEmpty
+        ? widget.profile.userEmergencyContact.forEach((element) {
+            list.add(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  element.relation != null
+                      ? Text(
+                          element.firstName +
+                              ' ' +
+                              element.lastName +
+                              ' (' +
+                              element.relation +
+                              ') ',
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        )
+                      : Text(
+                          element.firstName + ' ' + element.lastName,
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                  element.tel != null
+                      ? Text(
+                          element.tel,
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        )
+                      : Text(
+                          'Undefined phone number',
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                  element.mail != null
+                      ? Text(
+                          element.mail,
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        )
+                      : Text(
+                          'Undefined email',
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                  Divider(
+                    color: Colors.transparent,
+                    height: 30,
                   ),
-            element.tel != null
-                ? Text(
-                    element.tel,
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  )
-                : Text(
-                    'Undefined phone number',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-            element.mail != null
-                ? Text(
-                    element.mail,
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  )
-                : Text(
-                    'Undefined email',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-            Divider(
-              color: Colors.transparent,
-              height: 30,
-            ),
-          ],
-        ),
-      );
-    });
+                ],
+              ),
+            );
+          })
+        : Container();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -269,34 +271,52 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          widget.profile.preferenceUser.idAllowChat.value == "1"
-                              ? Image.asset(
-                                  'Assets/ok.png',
-                                  fit: BoxFit.fitHeight,
-                                )
+                          widget.profile.preferenceUser != null
+                              ? widget.profile.preferenceUser.idAllowChat
+                                          .value ==
+                                      "1"
+                                  ? Image.asset(
+                                      'Assets/ok.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
+                                  : Image.asset(
+                                      'Assets/error.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
                               : Image.asset(
                                   'Assets/error.png',
                                   fit: BoxFit.fitHeight,
                                 ),
                           SizedBox(height: height * 0.012),
-                          widget.profile.preferenceUser.idAllowFirstName
-                                      .value ==
-                                  "1"
-                              ? Image.asset(
-                                  'Assets/ok.png',
-                                  fit: BoxFit.fitHeight,
-                                )
+                          widget.profile.preferenceUser != null
+                              ? widget.profile.preferenceUser.idAllowFirstName
+                                          .value ==
+                                      "1"
+                                  ? Image.asset(
+                                      'Assets/ok.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
+                                  : Image.asset(
+                                      'Assets/error.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
                               : Image.asset(
                                   'Assets/error.png',
                                   fit: BoxFit.fitHeight,
                                 ),
                           SizedBox(height: height * 0.012),
-                          widget.profile.preferenceUser.idIncludeTel1.value ==
-                                  "1"
-                              ? Image.asset(
-                                  'Assets/ok.png',
-                                  fit: BoxFit.fitHeight,
-                                )
+                          widget.profile.preferenceUser != null
+                              ? widget.profile.preferenceUser.idIncludeTel1
+                                          .value ==
+                                      "1"
+                                  ? Image.asset(
+                                      'Assets/ok.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
+                                  : Image.asset(
+                                      'Assets/error.png',
+                                      fit: BoxFit.fitHeight,
+                                    )
                               : Image.asset(
                                   'Assets/error.png',
                                   fit: BoxFit.fitHeight,
@@ -349,10 +369,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     padding: EdgeInsets.symmetric(vertical: width * 0.02),
                     child: Row(
                       children: [
-                        Image.asset(
-                          'Assets/ok.png',
-                          fit: BoxFit.fitHeight,
-                        ),
+                        widget.profile.userEmergencyContact.isNotEmpty
+                            ? Image.asset(
+                                'Assets/ok.png',
+                                fit: BoxFit.fitHeight,
+                              )
+                            : Image.asset(
+                                'Assets/error.png',
+                                fit: BoxFit.fitHeight,
+                              ),
                         SizedBox(
                           width: width * 0.02,
                         ),

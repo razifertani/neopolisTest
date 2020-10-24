@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     return MaterialApp(
-      title: 'Neopolis Development',
+      title: 'Found Me',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'SourceSansPro',

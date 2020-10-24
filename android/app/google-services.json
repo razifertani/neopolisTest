@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "755424738768-6uu8pqg56f8l4cg9djf9kq57bpnfp53v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.neopolis",
+            "certificate_hash": "b6051efd07fc3be52bf10a5a9828955f449433bf"
+          }
+        },
+        {
+          "client_id": "755424738768-nidjm65u76mqjk2cl8k81m2v6dggjf8g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.neopolis",
+            "certificate_hash": "e3d62bcf6341eca61cdc13d5801c53f82fabd722"
+          }
+        },
+        {
+          "client_id": "755424738768-88igb3agl39rmqnsg5cm2dm2kh61adfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.neopolis",
+            "certificate_hash": "952e605fa0b5cb91fab12b5605c5f4313017c97a"
+          }
+        },
+        {
           "client_id": "755424738768-v5itebcp6rc3cb0dns8g34cq1sol9bei.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mercury_client/mercury_client.dart';
 import 'package:neopolis/Core/Error/exceptions.dart';
+import 'package:neopolis/Core/Services/socialMediaService.dart';
 import 'package:neopolis/Features/Signin/Data/Datasource/userRemoteDatasource.dart';
 import 'package:http/http.dart' as http;
 import 'package:neopolis/Features/Signin/Domain/Entities/profileEntity.dart';
@@ -72,6 +73,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
+  Future<Profile> loginGoogle(String test) async {
+    Profile profile = await SocialMediaService().signInWithGoogle();
+    return profile;
+  }
+
+  @override
   Future<String> logout(String idUser, String idSession) async {
     final response = await http.get(
       "https://ws.interface-crm.com:444/view_user?id_user=$idUser",
@@ -90,5 +97,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     } else {
       throw ServerExeption();
     }
+  }
+
+  @override
+  Future<String> logoutGoogle(String test) async {
+    await SocialMediaService().signOutGoogle();
+    return 'Success';
   }
 }
