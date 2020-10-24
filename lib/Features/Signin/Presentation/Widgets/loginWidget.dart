@@ -16,10 +16,10 @@ class LoginDisplay extends StatefulWidget {
 }
 
 class _LoginDisplayState extends State<LoginDisplay> {
-  // String email = 'foundme.neodev@gmail.com';
-  // String password = 'NeoDev12345#';
-  String email;
-  String password;
+  String email = 'foundme.neodev@gmail.com';
+  String password = 'NeoDev12345#';
+  // String email;
+  // String password;
   String message = 'null';
   bool isHidden = true;
   bool checkerEmail = true;
@@ -29,29 +29,62 @@ class _LoginDisplayState extends State<LoginDisplay> {
       'Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character';
 
   void showAlert(BuildContext context, String message) {
-    Alert(
-      context: context,
-      title: "Error",
-      desc: message,
-      style: AlertStyle(
-        titleStyle: TextStyle(fontSize: 28),
-        descStyle: TextStyle(fontSize: 24),
-      ),
-      buttons: [
-        DialogButton(
-          color: Colors.green,
-          child: Text(
-            "Try Again",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-            ),
+    if (message == 'Wrong password' || message == 'Invalid password') {
+      Alert(
+        context: context,
+        title: 'Incorrect password',
+        desc: 'The password you entred is incorrect.\nPlease try again',
+        style: AlertStyle(
+          titleStyle: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
           ),
-          onPressed: () => Navigator.pop(context),
-          width: MediaQuery.of(context).size.width * 0.6,
-        )
-      ],
-    ).show();
+          descStyle: TextStyle(fontSize: 16),
+        ),
+        buttons: [
+          DialogButton(
+            color: Colors.green,
+            child: Text(
+              "Try Again",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: MediaQuery.of(context).size.width * 0.6,
+          )
+        ],
+      ).show();
+    }
+    if (message == 'User does not exist') {
+      Alert(
+        context: context,
+        title: message,
+        desc: 'The email you entred does not match any user.\nPlease try again',
+        style: AlertStyle(
+          titleStyle: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+          ),
+          descStyle: TextStyle(fontSize: 16),
+        ),
+        buttons: [
+          DialogButton(
+            color: Colors.green,
+            child: Text(
+              "Try Again",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: MediaQuery.of(context).size.width * 0.6,
+          )
+        ],
+      ).show();
+    }
   }
 
   @override
